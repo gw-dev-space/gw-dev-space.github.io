@@ -3,13 +3,13 @@
 // 개인정보처리방침(/privacy)과 앱 목록(/apps)은 이 파일을 읽어 자동으로 구성됨
 
 export const operator = {
-	name: '[운영자명]',
-	email: '[문의 이메일]',
+	name: '안규원',
+	email: 'gw.dev.space@gmail.com',
 	// 개인정보 보호책임자 (1인 운영이면 운영자 본인)
 	privacyOfficer: {
-		name: '[이름]',
+		name: '안규원',
 		title: '대표',
-		email: '[문의 이메일]',
+		email: 'gw.dev.space@gmail.com',
 	},
 };
 
