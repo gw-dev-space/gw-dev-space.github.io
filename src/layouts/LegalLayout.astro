@@ -1,0 +1,73 @@
+---
+// Markdown 페이지(이용약관, 개인정보처리방침 등)에서 frontmatter `layout`으로 사용하는 레이아웃
+
+import Hero from '../components/Hero.astro';
+import { operator } from '../data/apps';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	frontmatter: {
+		title: string;
+		description?: string;
+		updated?: string;
+	};
+}
+
+const { title, description, updated } = Astro.props.frontmatter;
+---
+
+<BaseLayout title={title} description={description} lang="ko">
+	<div class="stack gap-15">
+		<header class="wrapper">
+			<Hero title={title} tagline={updated ? `시행일: ${updated}` : undefined} align="start" />
+		</header>
+		<main class="wrapper">
+			<article class="content">
+				<slot />
+
+				<h2>문의</h2>
+				<ul>
+					<li>운영자: {operator.name}</li>
+					<li>이메일: <a href={`mailto:${operator.email}`}>{operator.email}</a></li>
+				</ul>
+			</article>
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	header {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.content {
+		max-width: 70ch;
+		margin-inline: auto;
+		padding-bottom: 5rem;
+		line-height: 1.7;
+	}
+
+	.content > :global(* + *) {
+		margin-top: 1rem;
+	}
+
+	.content :global(h2) {
+		margin-top: 2.5rem;
+		font-size: var(--text-xl);
+	}
+
+	.content :global(ol),
+	.content :global(ul) {
+		padding-inline-start: 1.5rem;
+	}
+
+	.content :global(li + li) {
+		margin-top: 0.5rem;
+	}
+
+	.content :global(a) {
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+	}
+</style>

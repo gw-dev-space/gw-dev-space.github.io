@@ -1,0 +1,67 @@
+---
+// 출시한 앱 목록과 앱별 이용약관·개인정보처리방침 링크 (src/data/apps.ts 기준)
+
+import Hero from '../components/Hero.astro';
+import { apps } from '../data/apps';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Apps" description="출시한 앱과 약관" lang="ko">
+	<div class="stack gap-15">
+		<header class="wrapper">
+			<Hero title="Apps" tagline="출시한 앱과 앱별 약관" />
+		</header>
+		<main class="wrapper">
+			<ul class="app-list">
+				{apps.map((app) => (
+					<li>
+						<h2>{app.name}</h2>
+						<p class="platform">{app.platform}</p>
+						<p>{app.description}</p>
+						<p class="links">
+							<a href={`/${app.slug}/terms/`}>이용약관</a>
+							<a href={`/privacy#${app.slug}`}>개인정보처리방침</a>
+						</p>
+					</li>
+				))}
+			</ul>
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.app-list {
+		display: grid;
+		gap: 1.5rem;
+		max-width: 70ch;
+		margin-inline: auto;
+		padding: 0 0 5rem;
+		list-style: none;
+	}
+
+	.app-list li {
+		padding: 1.5rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1rem;
+		background: var(--gradient-subtle);
+	}
+
+	.app-list li > * + * {
+		margin-top: 0.5rem;
+	}
+
+	.platform {
+		color: var(--gray-400);
+		font-size: var(--text-sm);
+	}
+
+	.links {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.links a {
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+	}
+</style>
